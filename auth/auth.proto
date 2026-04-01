@@ -7,6 +7,7 @@ option go_package = "github.com/pav-dev98/pm-proto/auth";
 // El servicio Auth
 service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Register(RegisterRequest) returns (RegisterResponse);
 }
 
 // Request: lo que el gateway envía al Auth service
@@ -17,6 +18,17 @@ message LoginRequest {
 
 // Response: lo que el Auth service devuelve al gateway
 message LoginResponse {
+  string access_token  = 1;
+  string refresh_token = 2;
+  string token_type    = 3; // "Bearer"
+}
+
+message RegisterRequest {
+  string email    = 1;
+  string password = 2;
+}
+
+message RegisterResponse {
   string access_token  = 1;
   string refresh_token = 2;
   string token_type    = 3; // "Bearer"
