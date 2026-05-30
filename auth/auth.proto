@@ -21,6 +21,13 @@ service AuthService {
       body: "*"
     };
   }
+
+  rpc Refresh(RefreshRequest) returns (RefreshResponse) {
+    option (google.api.http) = {
+      post: "/v1/auth/refresh"
+      body: "*"
+    };
+  }
 }
 
 // Request: lo que el gateway envía al Auth service
@@ -45,4 +52,12 @@ message RegisterResponse {
   string access_token  = 1;
   string refresh_token = 2;
   string token_type    = 3; // "Bearer"
+}
+
+message RefreshRequest {
+  string refresh_token = 1;
+}
+
+message RefreshResponse {
+  string access_token = 1;
 }
